@@ -334,12 +334,24 @@ public final class EditorPane extends AbstractPane
 		int	index = (Integer)controller.get("selectedMovieIndex");
 		Movie	movie = movies.get(index);
 
-		// Update the title and image properties in the model
+		// Update the properties in the model
 		controller.set("movie.title", movie.getTitle());
 		controller.set("movie.imageFile", movie.getImage());
-
-		// TODO #3: Update the other 13 properties, summary, and comments below
-		//controller.set("movie.foo", movie.getFoo());	// <-- 13 like this...
+		controller.set("movie.year", movie.getYear());
+		controller.set("movie.ageRating", movie.getAgeRating());
+		controller.set("movie.runtime", movie.getRuntime());
+		controller.set("movie.awardPicture", movie.getAwardPicture());
+		controller.set("movie.awardDirecting", movie.getAwardDirecting());
+		controller.set("movie.awardCinematography", movie.getAwardCinematography());
+		controller.set("movie.awardActing", movie.getAwardActing());
+		controller.set("movie.userAvgRating", movie.getUserAvgRating());
+		controller.set("movie.numUserReviews", movie.getNumUserReviews());
+		controller.set("movie.genre", movie.getGenre());
+		controller.set("movie.director", movie.getDirector());
+		controller.set("movie.animated", movie.isAnimated());
+		controller.set("movie.color", movie.isColor());
+		controller.set("movie.summary", movie.getSummary());
+		controller.set("movie.comments", movie.getComments());
 
 		// Update the text+anchor+caret properties used by TextAreas
 		controller.set("movie.summary", "");			// <-- then for summary
