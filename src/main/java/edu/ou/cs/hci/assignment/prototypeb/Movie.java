@@ -61,9 +61,9 @@ public final class Movie
 
 	private final SimpleStringProperty director;
 
-	private final SimpleBooleanProperty isAnimated;
+	private final SimpleBooleanProperty animated;
 
-	private final SimpleBooleanProperty isColor;
+	private final SimpleBooleanProperty color;
 
 	private final SimpleStringProperty summary;
 
@@ -91,7 +91,7 @@ public final class Movie
 		// Create an integer for storing the column number
 		int col = 0;
 
-		// Create properties for the first two attributes.
+		// Create properties for every attribute.
 
 		title = new SimpleStringProperty(item.get(col++));
 		image = new SimpleStringProperty(item.get(col++));
@@ -106,8 +106,8 @@ public final class Movie
 		numUserReviews = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
 		genre = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
 		director = new SimpleStringProperty(item.get(col++));
-		isAnimated = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
-		isColor = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		animated = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		color = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
 		summary = new SimpleStringProperty(item.get(col++));
 		comments = new SimpleStringProperty(item.get(col++));
 
@@ -119,39 +119,141 @@ public final class Movie
 
 	// Each attribute has methods to access and modify its value.
 
-	public String	getTitle()
-	{
-		return title.get();
+	public String	getTitle() {
+        return title.get();
 	}
 
-	public void	setTitle(String v)
-	{
-		title.set(v);
+	public void	setTitle(String v) {
+        title.set(v);
 	}
 
-	public String	getImage()
-	{
+	public String	getImage() {
 		return image.get();
 	}
 
-	public void	setImage(String v)
-	{
+	public void	setImage(String v) {
 		image.set(v);
 	}
 
-	// TODO #2: Create access and modify methods for the other 15 attributes.
-	// For non-string attributes, use primitive types (boolean, int, double)
-	// for the argument and return types.
+    public int getYear() {
+        return year.get();
+    }
 
-	//public footype	getFoo()
-	//{
-	//	return foo.get();
-	//}
+    public void setYear(int i) {
+        year.set(i);
+    }
 
-	//public void	setFoo(footype v)
-	//{
-	//	foo.set(v);
-	//}
+    public String getAgeRating() {
+        return ageRating.get();
+    }
+
+    public void setAgeRating(String s) {
+        ageRating.set(s);
+    }
+
+    public int getRuntime() {
+        return runtime.get();
+    }
+
+    public void setRuntime(int i) {
+        runtime.set(i);
+    }
+
+    public boolean getAwardPicture() {
+        return awardPicture.get();
+    }
+
+    public void setAwardPicture(boolean b) {
+        awardPicture.set(b);
+    }
+
+    public boolean getAwardDirecting() {
+        return awardDirecting.get();
+    }
+
+    public void setAwardDirecting(boolean b) {
+        awardDirecting.set(b);
+    }
+
+    public boolean getAwardCinematography() {
+        return awardCinematography.get();
+    }
+
+    public void setAwardCinematography(boolean b) {
+        awardCinematography.set(b);
+    }
+
+    public boolean getAwardActing() {
+        return awardActing.get();
+    }
+
+    public void setAwardActing(boolean b) {
+        awardActing.set(b);
+    }
+
+    public double getUserAvgRating() {
+        return userAvgRating.get();
+    }
+
+    public void setUserAvgRating(double d) {
+        userAvgRating.set(d);
+    }
+
+    public int getNumUserReviews() {
+        return numUserReviews.get();
+    }
+
+    public void setNumUserReviews(int i) {
+        numUserReviews.set(i);
+    }
+
+    public int getGenre() {
+        return genre.get();
+    }
+
+    public void setGenre(int i) {
+        genre.set(i);
+    }
+
+    public String getDirector() {
+        return director.get();
+    }
+
+    public void setDirector(String s) {
+        director.set(s);
+    }
+
+    public boolean isAnimated() {
+        return animated.get();
+    }
+
+    public void setAnimated(boolean b) {
+        animated.set(b);
+    }
+
+    public boolean isColor() {
+        return color.get();
+    }
+
+    public void setColor(boolean b) {
+        color.set(b);
+    }
+
+    public String getSummary() {
+        return summary.get();
+    }
+
+    public void setSummary(String s) {
+        summary.set(s);
+    }
+
+    public String getComments() {
+        return comments.get();
+    }
+
+    public void setComments(String s) {
+        comments.set(s);
+    }
 
 	//**********************************************************************
 	// Public Methods (Alternative Access Methods)
