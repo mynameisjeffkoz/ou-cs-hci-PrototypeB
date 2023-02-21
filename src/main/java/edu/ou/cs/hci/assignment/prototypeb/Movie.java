@@ -42,9 +42,32 @@ public final class Movie
 	private final SimpleStringProperty		title;
 	private final SimpleStringProperty		image;
 
-	// TODO #0: Add members for the other 15 attributes.
+	private final SimpleIntegerProperty year;
 
-	//private final SimpleFootypeProperty	foo;
+	private final SimpleStringProperty ageRating;
+
+	private final SimpleIntegerProperty runtime;
+
+	private final SimpleBooleanProperty awardPicture,
+			awardDirecting,
+			awardCinematography,
+			awardActing;
+
+	private final SimpleDoubleProperty userAvgRating;
+
+	private final SimpleIntegerProperty numUserReviews;
+
+	private final SimpleIntegerProperty genre;
+
+	private final SimpleStringProperty director;
+
+	private final SimpleBooleanProperty isAnimated;
+
+	private final SimpleBooleanProperty isColor;
+
+	private final SimpleStringProperty summary;
+
+	private final SimpleStringProperty comments;
 
 	//**********************************************************************
 	// Constructors and Finalizer
@@ -65,15 +88,29 @@ public final class Movie
 		// of how to map integer bits to and from subsets of genres. You'll need
 		// to write similar code if you chose genre as one of your 3 attributes.
 
+		// Create an integer for storing the column number
+		int col = 0;
+
 		// Create properties for the first two attributes.
-		title = new SimpleStringProperty(item.get(0));
-		image = new SimpleStringProperty(item.get(1));
 
-		// TODO #1: Create properties for the other 15 attributes. For
-		// non-string types, look for methods in the Boolean, Integer, and
-		// Double classes to do any needed conversions or parsing of strings.
+		title = new SimpleStringProperty(item.get(col++));
+		image = new SimpleStringProperty(item.get(col++));
+		year = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
+		ageRating = new SimpleStringProperty(item.get(col++));
+		runtime = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
+		awardPicture = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		awardDirecting = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		awardCinematography = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		awardActing = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		userAvgRating = new SimpleDoubleProperty(Double.parseDouble(item.get(col++)));
+		numUserReviews = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
+		genre = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
+		director = new SimpleStringProperty(item.get(col++));
+		isAnimated = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		isColor = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
+		summary = new SimpleStringProperty(item.get(col++));
+		comments = new SimpleStringProperty(item.get(col++));
 
-		//foo = new SimpleFootypeProperty(item.get(2));
 	}
 
 	//**********************************************************************
