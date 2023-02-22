@@ -17,6 +17,8 @@ package edu.ou.cs.hci.assignment.prototypeb;
 //import java.lang.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
@@ -288,10 +290,16 @@ public final class Movie
         String[] genres = s.split("[^\\w|-]");
         // Get the list of all genres
         String[] allGenres = Movie.getAllGenres();
+        // For each entry in the input list
         for (String genre:genres) {
+            // For each possible genre
             for (int i = 0; i < allGenres.length; i++) {
+                // Check if the genre matches
                 if (genre.equalsIgnoreCase(allGenres[i])) {
+                    // Calculate the bit value and add it to the code
                     code += (1 << i);
+                    // Exit the inner for loop on success
+                    break;
                 }
             }
         }
@@ -303,20 +311,39 @@ public final class Movie
      * @return a String containing the genres, seperated by commas
      */
     public static String decodeGenre(int i) {
-        String genres = "";
-        return genres;
+        // Convert the int code into its binary representation (as a string)
+        String code = Integer.toBinaryString(i);
+        // Create a StringBuilder
+        StringBuilder builder = new StringBuilder();
+        // Reverse the order of the code String (to read right to left)
+        // Add the code to the builder
+        builder.append(code);
+        // Reverse the builder;
+        builder.reverse();
+        // Store the new value
+        code = builder.toString();
+        // Create a StringJoiner, to automatically format the list of genres
+        StringJoiner joiner = new StringJoiner(", ");
+        // Get the list of all possible genres
+        String[] allGenres = Movie.getAllGenres();
+        // Read the code one character at a time
+        for (int idx = 0; idx <  code.length(); idx++) {
+            // If that bit shows true
+            if (code.charAt(idx) == '1')
+                // Add the corresponding genre to the list
+                joiner.add(allGenres[idx]);
+            // Otherwise, continue
+        }
+        // Return the String containing a formatted list
+        return joiner.toString();
     }
 
     public static String[] getAllGenres() {
-        String[] genres = {"Action", "Comedy","Documentary","Drama","Fantasy","Horror","Romance",
-                "Sci-Fi","Thriller","Western"};
+        String[] genres = {"Action", "Comedy", "Documentary", "Drama", "Fantasy", "Horror", "Romance",
+                "Sci-Fi", "Thriller", "Western"};
         return genres;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Movie.encodeGenre("Drama, Romance, Sci-Fi"));
-    }
 }
-
 
 //******************************************************************************
