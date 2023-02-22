@@ -15,6 +15,7 @@
 package edu.ou.cs.hci.assignment.prototypeb;
 
 //import java.lang.*;
+import java.util.Arrays;
 import java.util.List;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
@@ -280,8 +281,20 @@ public final class Movie
      * @param s The String containing movie genres
      * @return an integer based on a bitwise encoding of the genre data
      */
-    public static int EncodeGenre(String s) {
+    public static int encodeGenre(String s) {
+        // Create an integer to store the encoding
         int code = 0;
+        // Split the list of genres into an array of individual entries
+        String[] genres = s.split("[^\\w|-]");
+        // Get the list of all genres
+        String[] allGenres = Movie.getAllGenres();
+        for (String genre:genres) {
+            for (int i = 0; i < allGenres.length; i++) {
+                if (genre.equalsIgnoreCase(allGenres[i])) {
+                    code += (1 << i);
+                }
+            }
+        }
         return code;
     }
 
@@ -293,6 +306,17 @@ public final class Movie
         String genres = "";
         return genres;
     }
+
+    public static String[] getAllGenres() {
+        String[] genres = {"Action", "Comedy","Documentary","Drama","Fantasy","Horror","Romance",
+                "Sci-Fi","Thriller","Western"};
+        return genres;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Movie.encodeGenre("Drama, Romance, Sci-Fi"));
+    }
 }
+
 
 //******************************************************************************
