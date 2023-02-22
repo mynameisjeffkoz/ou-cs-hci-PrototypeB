@@ -273,6 +273,25 @@ public final class Movie
 			return null;
 		}
 	}
+
+    /**
+     * Calculate the integer encoding of the genre data from a String
+     * @param s The String containing movie genres
+     * @return an integer based on a bitwise encoding of the genre data
+     */
+    public static int EncodeGenre(String s) {
+        int code = 0;
+        return code;
+    }
+
+    /**
+     * Generate the String representation of genres based on an encoded integer
+     * @return a String containing the genres, seperated by commas
+     */
+    public static String decodeGenre(int i) {
+        String genres = "";
+        return genres;
+    }
 }
 
 //******************************************************************************
