@@ -334,16 +334,17 @@ public final class EditorPane extends AbstractPane
 		int	index = (Integer)controller.get("selectedMovieIndex");
 		Movie	movie = movies.get(index);
 
+		//TODO: Fix term names
 		// Update the properties in the model
 		controller.set("movie.title", movie.getTitle());
 		controller.set("movie.imageFile", movie.getImage());
 		controller.set("movie.year", movie.getYear());
 		controller.set("movie.ageRating", movie.getAgeRating());
 		controller.set("movie.runtime", movie.getRuntime());
-		controller.set("movie.awardPicture", movie.getAwardPicture());
-		controller.set("movie.awardDirecting", movie.getAwardDirecting());
-		controller.set("movie.awardCinematography", movie.getAwardCinematography());
-		controller.set("movie.awardActing", movie.getAwardActing());
+		controller.set("movie.award.picture", movie.getAwardPicture());
+		controller.set("movie.award.directing", movie.getAwardDirecting());
+		controller.set("movie.award.cinematography", movie.getAwardCinematography());
+		controller.set("movie.award.acting", movie.getAwardActing());
 		controller.set("movie.userAvgRating", movie.getUserAvgRating());
 		controller.set("movie.numUserReviews", movie.getNumUserReviews());
 		controller.set("movie.genre", movie.getGenre());
