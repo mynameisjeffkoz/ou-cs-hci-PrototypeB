@@ -89,6 +89,7 @@ public final class Movie
 		// to write similar code if you chose genre as one of your 3 attributes.
 
 		// Create an integer for storing the column number
+        // This allows the column number to increment automatically
 		int col = 0;
 
 		// Create properties for every attribute.
