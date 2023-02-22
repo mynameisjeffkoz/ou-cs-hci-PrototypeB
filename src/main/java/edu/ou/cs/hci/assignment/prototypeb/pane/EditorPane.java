@@ -348,8 +348,8 @@ public final class EditorPane extends AbstractPane
 		controller.set("movie.numUserReviews", movie.getNumUserReviews());
 		controller.set("movie.genre", movie.getGenre());
 		controller.set("movie.director", movie.getDirector());
-		controller.set("movie.animated", movie.isAnimated());
-		controller.set("movie.color", movie.isColor());
+		controller.set("movie.isAnimated", movie.isAnimated());
+		controller.set("movie.isColor", movie.isColor());
 		controller.set("movie.summary", movie.getSummary());
 		controller.set("movie.comments", movie.getComments());
 
