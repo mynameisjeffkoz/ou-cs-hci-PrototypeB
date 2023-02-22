@@ -345,8 +345,8 @@ public final class EditorPane extends AbstractPane
 		controller.set("movie.award.directing", movie.getAwardDirecting());
 		controller.set("movie.award.cinematography", movie.getAwardCinematography());
 		controller.set("movie.award.acting", movie.getAwardActing());
-		controller.set("movie.userAvgRating", movie.getUserAvgRating());
-		controller.set("movie.numUserReviews", movie.getNumUserReviews());
+		controller.set("movie.averageReviewScore", movie.getUserAvgRating());
+		controller.set("movie.numberOfReviews", movie.getNumUserReviews());
 		controller.set("movie.genre", movie.getGenre());
 		controller.set("movie.director", movie.getDirector());
 		controller.set("movie.isAnimated", movie.isAnimated());
