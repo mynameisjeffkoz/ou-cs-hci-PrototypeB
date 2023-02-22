@@ -460,15 +460,18 @@ public final class CollectionPane extends AbstractPane
 	// You must adapt the code to the column's attribute type in each case.
 	// Allow editing (shallowly) in at least one of the three columns.
 
-	private final class GenreEditHandler implements EventHandler<TableColumn.CellEditEvent<Movie, String>> {
+	private final class Attr1EditHandler
+			implements EventHandler<TableColumn.CellEditEvent<Movie, String>> {
+
 		public void handle(TableColumn.CellEditEvent<Movie, String> t) {
 			// Get the movie for the row that was edited
 			int	index = t.getTablePosition().getRow();
 			Movie	movie = movies.get(index);
 
 			// Set its genres to the new value that was entered
-			movie.setGenre(Movie.EncodeGenre(t.getNewValue()));
+			movie.setGenre(Movie.encodeGenre(t.getNewValue()));
 		}
+
 	}
 
 	// private final class Attr2EditHandler
