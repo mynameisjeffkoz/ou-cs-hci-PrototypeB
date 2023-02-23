@@ -194,7 +194,7 @@ public final class CollectionPane extends AbstractPane
 		table.getColumns().add(buildTitleColumn());
 		table.getColumns().add(buildImageColumn());
 
-		// TODO #8: Uncomment these to add columns for your three attributes.
+		// Add columns for the three attributes.
 		table.getColumns().add(buildAttr1Column());
 		table.getColumns().add(buildAttr2Column());
 		table.getColumns().add(buildAttr3Column());
@@ -274,16 +274,14 @@ public final class CollectionPane extends AbstractPane
 		return column;
 	}
 
-	// TODO #7: Complete the TableColumn methods for your three attributes.
-	// You must adapt the code to the column's attribute type in each case.
-
+	// This TableColumn displays genres, and allows editing
 	private TableColumn<Movie, String>	buildAttr1Column()
 	{
 		TableColumn<Movie, String>	column =
 				new TableColumn<Movie, String>("Genre");
 
 		column.setEditable(true);
-		column.setPrefWidth(250);
+		column.setPrefWidth(150);
 		column.setCellValueFactory(
 				new PropertyValueFactory<Movie, String>("genreString"));
 		column.setCellFactory(new Attr1CellFactory());
@@ -293,11 +291,12 @@ public final class CollectionPane extends AbstractPane
 		return column;
 	}
 
+	// This TableColumn displays average user review, and allows editing
 	private TableColumn<Movie, Double>	buildAttr2Column()
 	{
 		TableColumn<Movie, Double> column = new TableColumn<Movie, Double>("Avg Review");
 		column.setEditable(true);
-		column.setPrefWidth(250);
+		column.setPrefWidth(80);
 		column.setCellValueFactory(
 				new PropertyValueFactory<Movie, Double>("userAvgRating"));
 		column.setCellFactory(new Attr2CellFactory());
@@ -307,12 +306,13 @@ public final class CollectionPane extends AbstractPane
 		return column;
 	}
 
+	// This TableColumn displays age rating, and allows editing
 	private TableColumn<Movie, String>	buildAttr3Column() {
 		TableColumn<Movie, String>	column =
 				new TableColumn<Movie, String>("Rating");
 
 		column.setEditable(true);
-		column.setPrefWidth(250);
+		column.setPrefWidth(80);
 		column.setCellValueFactory(
 				new PropertyValueFactory<Movie, String>("ageRating"));
 		column.setCellFactory(new Attr3CellFactory());
@@ -360,9 +360,7 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// TODO #6: Complete the CellFactory classes for your three attributes.
-	// You must adapt the code to the column's attribute type in each case.
-
+	// This CellFactory creates Cells for the genre column in the table.
 	private final class Attr1CellFactory implements Callback<TableColumn<Movie, String>, TableCell<Movie, String>>
 	{
 
@@ -370,7 +368,7 @@ public final class CollectionPane extends AbstractPane
 			return new Attr1Cell();
 		}
 	}
-
+	// This CellFactory creates Cells for the review column in the table.
 	private final class Attr2CellFactory implements Callback<TableColumn<Movie, Double>, TableCell<Movie, Double>>
 	{
 
@@ -379,7 +377,7 @@ public final class CollectionPane extends AbstractPane
 			return new Attr2Cell();
 		}
 	}
-
+	// This CellFactory creates Cells for the rating column in the table.
 	private final class Attr3CellFactory implements Callback<TableColumn<Movie, String>, TableCell<Movie, String>>
 	{
 
@@ -464,10 +462,7 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// TODO #5: Complete the Cell classes for your three attributes.
-	// You must adapt the code to the column's attribute type in each case.
-	// Allow editing (shallowly) in at least one of the three columns.
-
+	// This TableCell displays the genre, and allows editing in a TextField.
 	private final class Attr1Cell
 		extends TextFieldTableCell<Movie, String> {
 
@@ -500,6 +495,7 @@ public final class CollectionPane extends AbstractPane
 
 	}
 
+	// This TableCell displays the review, and allows editing in a TextField.
 	private final class Attr2Cell extends TextFieldTableCell<Movie, Double>
 	{
 
@@ -535,6 +531,7 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
+	// This TableCell displays the age rating, and allows editing in a TextField.
 	private final class Attr3Cell extends TextFieldTableCell<Movie, String> {
 
 		public Attr3Cell() {
@@ -586,10 +583,7 @@ public final class CollectionPane extends AbstractPane
 	//{
 	//}
 
-	// TODO #4: Add an EventHandler class for each of your editable columns.
-	// You must adapt the code to the column's attribute type in each case.
-	// Allow editing (shallowly) in at least one of the three columns.
-
+	// Add an EventHandler class for each of your editable columns.
 	private final class Attr1EditHandler
 			implements EventHandler<TableColumn.CellEditEvent<Movie, String>> {
 
