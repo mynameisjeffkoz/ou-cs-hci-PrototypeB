@@ -29,9 +29,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 import javafx.util.converter.*;
 import edu.ou.cs.hci.assignment.prototypeb.*;
 import edu.ou.cs.hci.resources.Resources;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 //******************************************************************************
 
@@ -194,7 +196,7 @@ public final class CollectionPane extends AbstractPane
 
 		// TODO #8: Uncomment these to add columns for your three attributes.
 		table.getColumns().add(buildAttr1Column());
-		//table.getColumns().add(buildAttr2Column());
+		table.getColumns().add(buildAttr2Column());
 		//table.getColumns().add(buildAttr3Column());
 
 		// Put the movies into an ObservableList to use as the table model
@@ -284,16 +286,26 @@ public final class CollectionPane extends AbstractPane
 		column.setPrefWidth(250);
 		column.setCellValueFactory(
 				new PropertyValueFactory<Movie, String>("genreString"));
-		column.setCellFactory(new TitleCellFactory());
+		column.setCellFactory(new Attr1CellFactory());
 
 		// Edits in this column update movie genres
 		column.setOnEditCommit(new Attr1EditHandler());
 		return column;
 	}
 
-	//private TableColumn<Movie, String>	buildAttr2Column()
-	//{
-	//}
+	private TableColumn<Movie, Double>	buildAttr2Column()
+	{
+		TableColumn<Movie, Double> column = new TableColumn<Movie, Double>("Avg Review");
+		column.setEditable(true);
+		column.setPrefWidth(250);
+		column.setCellValueFactory(
+				new PropertyValueFactory<Movie, Double>("userAvgRating"));
+		column.setCellFactory(new Attr2CellFactory());
+
+		// Edits in this column update movie genres
+		column.setOnEditCommit(new Attr2EditHandler());
+		return column;
+	}
 
 	//private TableColumn<Movie, String>	buildAttr3Column()
 	//{
@@ -348,9 +360,14 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// private final class Attr2CellFactory
-	// {
-	// }
+	private final class Attr2CellFactory implements Callback<TableColumn<Movie, Double>, TableCell<Movie, Double>>
+	{
+
+		@Override
+		public TableCell<Movie, Double> call(TableColumn<Movie, Double> param) {
+			return new Attr2Cell();
+		}
+	}
 
 	// private final class Attr3CellFactory
 	// {
@@ -455,11 +472,11 @@ public final class CollectionPane extends AbstractPane
 				return;
 			}
 
-			// This cell shows the value of the title attribute as simple text.
-			// If the title is too long, an ellipsis is inserted at the end.
-			String	title = value;
+			// This cell shows the value of the genre attribute as simple text.
+			// If the genre is too long, an ellipsis is inserted at the end.
+			String	genre = value;
 
-			setText(title);
+			setText(genre);
 			setTextOverrun(OverrunStyle.ELLIPSIS);
 			setGraphic(null);
 		}
@@ -468,9 +485,40 @@ public final class CollectionPane extends AbstractPane
 
 	}
 
-	// private final class Attr2Cell
-	// {
-	// }
+	private final class Attr2Cell extends TextFieldTableCell<Movie, Double>
+	{
+
+		public Attr2Cell() {
+			super(new StringConverter<Double>() {
+				@Override
+				public String toString(Double object) {
+					return Double.toString(object);
+				}
+
+				@Override
+				public Double fromString(String string) {
+					return Double.parseDouble(string);
+				}
+			});
+		}
+		public void	updateItem(Double value, boolean isEmpty)
+		{
+			super.updateItem(value, isEmpty);		// Prepare for setup
+
+			if (isEmpty || (value == null))		// Handle special cases
+			{
+				setText(null);
+				setGraphic(null);
+
+				return;
+			}
+
+			// This cell shows the value of the review attribute as simple text.
+
+			setText(value.toString());
+			setGraphic(null);
+		}
+	}
 
 	// private final class Attr3Cell
 	// {
@@ -518,9 +566,18 @@ public final class CollectionPane extends AbstractPane
 
 	}
 
-	// private final class Attr2EditHandler
-	// {
-	// }
+	private final class Attr2EditHandler
+		implements EventHandler<TableColumn.CellEditEvent<Movie, Double>> {
+
+		public void handle(TableColumn.CellEditEvent<Movie, Double> t) {
+			// Get the movie for the row that was edited
+			int	index = t.getTablePosition().getRow();
+			Movie	movie = movies.get(index);
+
+			// Set its avg review to the new value that was entered
+			movie.setUserAvgRating(t.getNewValue());
+		}
+	}
 
 	// private final class Attr3EditHandler
 	// {
