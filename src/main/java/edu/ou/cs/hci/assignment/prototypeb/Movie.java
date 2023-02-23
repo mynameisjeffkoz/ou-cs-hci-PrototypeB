@@ -151,6 +151,14 @@ public final class Movie
         return ageRating.get();
     }
 
+    public int getAgeRatingInt() {
+        String[] ratings = {"G", "PG", "PG-13", "R"};
+        for (int i = 0; i < ratings.length;i++)
+            if (getAgeRating().equalsIgnoreCase(ratings[i]))
+                return i;
+        return 0;
+    }
+
     public void setAgeRating(String s) {
         ageRating.set(s);
     }

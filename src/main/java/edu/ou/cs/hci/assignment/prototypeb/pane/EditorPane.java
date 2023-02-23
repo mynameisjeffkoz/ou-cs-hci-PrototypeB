@@ -339,7 +339,7 @@ public final class EditorPane extends AbstractPane
 		controller.set("movie.title", movie.getTitle());
 		controller.set("movie.imageFile", movie.getImage());
 		controller.set("movie.year", movie.getYear());
-		controller.set("movie.ageRating", movie.getAgeRating());
+		controller.set("movie.rating", movie.getAgeRatingInt());
 		controller.set("movie.runtime", movie.getRuntime());
 		controller.set("movie.award.picture", movie.getAwardPicture());
 		controller.set("movie.award.directing", movie.getAwardDirecting());
