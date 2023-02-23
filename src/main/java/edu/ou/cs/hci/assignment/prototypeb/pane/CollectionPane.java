@@ -197,7 +197,7 @@ public final class CollectionPane extends AbstractPane
 		// TODO #8: Uncomment these to add columns for your three attributes.
 		table.getColumns().add(buildAttr1Column());
 		table.getColumns().add(buildAttr2Column());
-		//table.getColumns().add(buildAttr3Column());
+		table.getColumns().add(buildAttr3Column());
 
 		// Put the movies into an ObservableList to use as the table model
 		table.setItems(FXCollections.observableArrayList(movies));
@@ -307,9 +307,20 @@ public final class CollectionPane extends AbstractPane
 		return column;
 	}
 
-	//private TableColumn<Movie, String>	buildAttr3Column()
-	//{
-	//}
+	private TableColumn<Movie, String>	buildAttr3Column() {
+		TableColumn<Movie, String>	column =
+				new TableColumn<Movie, String>("Rating");
+
+		column.setEditable(true);
+		column.setPrefWidth(250);
+		column.setCellValueFactory(
+				new PropertyValueFactory<Movie, String>("ageRating"));
+		column.setCellFactory(new Attr3CellFactory());
+
+		// Edits in this column update movie genres
+		column.setOnEditCommit(new Attr3EditHandler());
+		return column;
+	}
 
 	//**********************************************************************
 	// Private Methods (Change Handlers)
@@ -369,9 +380,13 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// private final class Attr3CellFactory
-	// {
-	// }
+	private final class Attr3CellFactory implements Callback<TableColumn<Movie, String>, TableCell<Movie, String>>
+	{
+
+		public TableCell<Movie, String> call(TableColumn<Movie, String> param) {
+			return new Attr3Cell();
+		}
+	}
 
 	//**********************************************************************
 	// Inner Classes (Cells)
@@ -520,9 +535,32 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// private final class Attr3Cell
-	// {
-	// }
+	private final class Attr3Cell extends TextFieldTableCell<Movie, String> {
+
+		public Attr3Cell() {
+			super(new DefaultStringConverter());
+		}
+
+		public void	updateItem(String value, boolean isEmpty)
+		{
+			super.updateItem(value, isEmpty);		// Prepare for setup
+
+			if (isEmpty || (value == null))		// Handle special cases
+			{
+				setText(null);
+				setGraphic(null);
+
+				return;
+			}
+
+			// This cell shows the value of the rating attribute as simple text.
+			String	rating = value;
+
+			setText(rating);
+			setTextOverrun(OverrunStyle.ELLIPSIS);
+			setGraphic(null);
+		}
+	}
 
 	//**********************************************************************
 	// Inner Classes (Table Column Edit Handling)
@@ -579,9 +617,18 @@ public final class CollectionPane extends AbstractPane
 		}
 	}
 
-	// private final class Attr3EditHandler
-	// {
-	// }
+	private final class Attr3EditHandler
+			implements EventHandler<TableColumn.CellEditEvent<Movie, String>> {
+
+		public void handle(TableColumn.CellEditEvent<Movie, String> t) {
+			// Get the movie for the row that was edited
+			int	index = t.getTablePosition().getRow();
+			Movie	movie = movies.get(index);
+
+			// Set its genres to the new value that was entered
+			movie.setAgeRating(t.getNewValue());
+		}
+	}
 }
 
 //******************************************************************************
