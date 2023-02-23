@@ -193,7 +193,7 @@ public final class CollectionPane extends AbstractPane
 		table.getColumns().add(buildImageColumn());
 
 		// TODO #8: Uncomment these to add columns for your three attributes.
-		//table.getColumns().add(buildAttr1Column());
+		table.getColumns().add(buildAttr1Column());
 		//table.getColumns().add(buildAttr2Column());
 		//table.getColumns().add(buildAttr3Column());
 
@@ -275,9 +275,21 @@ public final class CollectionPane extends AbstractPane
 	// TODO #7: Complete the TableColumn methods for your three attributes.
 	// You must adapt the code to the column's attribute type in each case.
 
-	//private TableColumn<Movie, String>	buildAttr1Column()
-	//{
-	//}
+	private TableColumn<Movie, String>	buildAttr1Column()
+	{
+		TableColumn<Movie, String>	column =
+				new TableColumn<Movie, String>("Genre");
+
+		column.setEditable(true);
+		column.setPrefWidth(250);
+		column.setCellValueFactory(
+				new PropertyValueFactory<Movie, String>("genreString"));
+		column.setCellFactory(new TitleCellFactory());
+
+		// Edits in this column update movie genres
+		column.setOnEditCommit(new Attr1EditHandler());
+		return column;
+	}
 
 	//private TableColumn<Movie, String>	buildAttr2Column()
 	//{
@@ -328,9 +340,13 @@ public final class CollectionPane extends AbstractPane
 	// TODO #6: Complete the CellFactory classes for your three attributes.
 	// You must adapt the code to the column's attribute type in each case.
 
-	// private final class Attr1CellFactory
-	// {
-	// }
+	private final class Attr1CellFactory implements Callback<TableColumn<Movie, String>, TableCell<Movie, String>>
+	{
+
+		public TableCell<Movie, String> call(TableColumn<Movie, String> param) {
+			return new Attr1Cell();
+		}
+	}
 
 	// private final class Attr2CellFactory
 	// {
@@ -420,9 +436,37 @@ public final class CollectionPane extends AbstractPane
 	// You must adapt the code to the column's attribute type in each case.
 	// Allow editing (shallowly) in at least one of the three columns.
 
-	// private final class Attr1Cell
-	// {
-	// }
+	private final class Attr1Cell
+		extends TextFieldTableCell<Movie, String> {
+
+		public Attr1Cell() {
+			super(new DefaultStringConverter());
+		}
+
+		public void	updateItem(String value, boolean isEmpty)
+		{
+			super.updateItem(value, isEmpty);		// Prepare for setup
+
+			if (isEmpty || (value == null))		// Handle special cases
+			{
+				setText(null);
+				setGraphic(null);
+
+				return;
+			}
+
+			// This cell shows the value of the title attribute as simple text.
+			// If the title is too long, an ellipsis is inserted at the end.
+			String	title = value;
+
+			setText(title);
+			setTextOverrun(OverrunStyle.ELLIPSIS);
+			setGraphic(null);
+		}
+
+
+
+	}
 
 	// private final class Attr2Cell
 	// {

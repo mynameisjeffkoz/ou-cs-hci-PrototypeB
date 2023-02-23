@@ -62,6 +62,8 @@ public final class Movie
 
 	private final SimpleIntegerProperty genre;
 
+    private final SimpleStringProperty genreString;
+
 	private final SimpleStringProperty director;
 
 	private final SimpleBooleanProperty animated;
@@ -109,6 +111,7 @@ public final class Movie
 		userAvgRating = new SimpleDoubleProperty(Double.parseDouble(item.get(col++)));
 		numUserReviews = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
 		genre = new SimpleIntegerProperty(Integer.parseInt(item.get(col++)));
+        genreString = new SimpleStringProperty(Movie.decodeGenre(getGenre()));
 		director = new SimpleStringProperty(item.get(col++));
 		animated = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
 		color = new SimpleBooleanProperty(Boolean.parseBoolean(item.get(col++)));
@@ -225,6 +228,17 @@ public final class Movie
 
     public void setGenre(int i) {
         genre.set(i);
+        // Also update the genreString
+        genreString.set(Movie.decodeGenre(i));
+    }
+
+    public String getGenreString() {
+        return genreString.get();
+    }
+
+    // Not to be accessed by users
+    private void setGenreString(String s) {
+        genreString.set(s);
     }
 
     public String getDirector() {
