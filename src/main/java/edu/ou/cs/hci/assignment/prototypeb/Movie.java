@@ -228,8 +228,10 @@ public final class Movie
 
     public void setGenre(int i) {
         genre.set(i);
-        // Also update the genreString
-        genreString.set(Movie.decodeGenre(i));
+        // Also update the genreString, if it's not already correct
+        String decoded = Movie.decodeGenre(i);
+        if (!genreString.equals(decoded))
+            setGenreString(decoded);
     }
 
     public String getGenreString() {
@@ -239,6 +241,10 @@ public final class Movie
     // Not to be accessed by users
     private void setGenreString(String s) {
         genreString.set(s);
+        // Check if the int code should be updated, and do so if necessary
+        int code = Movie.encodeGenre(s);
+        if (code != getGenre())
+            setGenre(code);
     }
 
     public String getDirector() {
